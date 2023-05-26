@@ -1,6 +1,5 @@
 use std::fmt;
 use std::ops::{Add, AddAssign, Sub, SubAssign};
-use std::convert::From;
 use std::marker::PhantomData;
 
 use super::Temperatura;
@@ -10,12 +9,18 @@ use super::Comum;
 pub struct Kelvin;
 
 impl Temperatura for Kelvin {
-    const FUSAO: Comum = 273 as Comum;
-    const EBULICAO: Comum = 373 as Comum;
-    const ZERO: Comum = 0 as Comum;
+    const FUSAO: Comum = 273.15;
+    const EBULICAO: Comum = 373.15;
+    const ZERO: Comum = 0.0;
 }
 
+pub struct Celsius;
 
+impl Temperatura for Celsius {
+    const FUSAO: Comum = 0.0;
+    const EBULICAO: Comum = 100.0;
+    const ZERO: Comum = -273.15;
+}
 
 pub struct Calor<Tm = Kelvin>
 where
@@ -40,6 +45,12 @@ where
 impl fmt::Display for Calor<Kelvin> {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         write!(f, "{}ºk", self.valor)
+    }
+}
+
+impl fmt::Display for Calor<Celsius> {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        write!(f, "{}ºc", self.valor)
     }
 }
 
@@ -84,13 +95,18 @@ where
     }
 }
 
-impl <Tm, Tp> From<Calor<Tp>> for Calor<Tm>
+
+impl <Tm> Calor<Tm>
 where
     Tm: Temperatura,
-    Tp: Temperatura,
-{
-    fn from(calor: Calor<Tp>) -> Self {
-        Self::gerar(((calor.valor - Tp::FUSAO)/(Tp::EBULICAO - Tp::FUSAO) * (Tm::EBULICAO - Tm::FUSAO)) - Tm::FUSAO)
+{   
+    pub fn from<Tp>(calor: Calor<Tp>) -> Calor<Tm>
+    where
+        Tp: Temperatura,
+    {
+        Self::gerar(((calor.valor - Tp::FUSAO)/(Tp::EBULICAO - Tp::FUSAO))*(Tm::EBULICAO - Tm::FUSAO)+Tm::FUSAO) 
     }
 }
+
+
 

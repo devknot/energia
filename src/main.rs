@@ -1,11 +1,21 @@
 //mod usina;
 mod utilidades;
 
-use utilidades::Calor;
+use utilidades::{Calor, Celsius, Kelvin};
 
-pub fn main() {
-    let mut a = Calor::gerar(2);
-    a += Calor::gerar(3);
+type Tm = Celsius;
 
-    println!("{}", a);
+type Tp = Kelvin;
+
+fn main() {
+    let a: Calor<Tm> = Calor::gerar(2.0);
+    let b: Calor<Tm> = Calor::gerar(3.0);
+
+    let c: Calor<Tm> = a + b;
+
+    let d: Calor<Tp> = Calor::from(c);
+
+    println!("{}", d);
 }
+
+

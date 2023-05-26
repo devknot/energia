@@ -1,7 +1,7 @@
 pub mod temperatura;
 pub use temperatura::*;
 
-pub type Comum = i64;
+pub type Comum = f32;
 
 pub trait Temperatura {
     const FUSAO: Comum; // fusão da água como referência
