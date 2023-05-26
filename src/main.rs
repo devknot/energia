@@ -1,7 +1,7 @@
 //mod usina;
 mod utilidades;
 
-use utilidades::{Calor, Celsius, Kelvin};
+use utilidades::{Calor, Celsius, Kelvin, forca};
 
 type Tm = Celsius;
 
@@ -16,6 +16,10 @@ fn main() {
     let d: Calor<Tp> = Calor::from(c);
 
     println!("{}", d);
+
+    let forca = forca::Forca::gerar(2.0);
+
+    println!("{}", forca);
 }
 
 
