@@ -1,12 +1,43 @@
-use crate::{Gas, Temperatura, Volume};
+use std::marker::PhantomData;
 
-pub struct Atmosfera;
+use crate::utilidades;
+
+use super::Gas;
+
+use super::gases;
 
 pub struct Compartimento<Gs> 
 where
     Gs: Gas,
 {
-    temperatura: Temperatura,
-    volume: Volume,
+    valor: utilidades::Comum,
+    phantom: PhantomData<Gs>,
 }
 
+impl <Gs> Compartimento<Gs>
+where
+    Gs: Gas,
+{
+    pub fn gerar(valor: utilidades::Comum) -> Self {
+        Self {
+            valor,
+            phantom: PhantomData,
+        }
+    }
+}
+
+pub struct Vacuo;
+
+impl Vacuo {
+    pub fn gerar(_: utilidades::Comum) -> Self {
+        Self
+    }
+}
+
+pub struct Void;
+
+impl Void {
+    pub fn gerar(_: utilidades::Comum) -> Self {
+        Self
+    }
+}

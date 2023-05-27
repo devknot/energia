@@ -1,7 +1,10 @@
 //mod usina;
 mod utilidades;
 
-use utilidades::{Calor, Celsius, Kelvin, forca};
+mod gases;
+
+use utilidades::{
+    temperatura::{Calor, Celsius, Kelvin}, forca};
 
 type Tm = Celsius;
 

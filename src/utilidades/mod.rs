@@ -1,6 +1,6 @@
 pub mod temperatura;
 pub mod forca;
-pub use temperatura::*;
+pub mod area;
 
 pub type Comum = f32;
 
@@ -11,4 +11,6 @@ pub trait Temperatura {
 }
 
 pub trait Potencia {}
+
+pub trait Superficie {}
 

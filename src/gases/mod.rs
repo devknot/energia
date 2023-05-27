@@ -1,16 +1,7 @@
+pub mod gases;
+pub mod compartimento;
 
-type Temperatura = u64;
-
-type Volume = [u64; 3];
-
-type Calor = u64;
-
-type CondutividadeTermica = u64;
-
-pub trait Gas {
-    fn calor_volume() -> Calor;
-    fn condutividade_termica() -> CondutividadeTermica;
-}
+pub trait Gas {}
 
 /*
 pub trait Compartimento {

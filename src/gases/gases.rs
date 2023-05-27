@@ -1,14 +1,12 @@
-use crate::{Gas, Temperatura, Volume, Calor, CondutividadeTermica};
+
+use super::Gas;
 
 pub struct Carbono;
 
-impl Gas for Carbono{
-    fn calor_volume() -> Calor {
-        6489500 //kcal/kg*C
-    }
-    fn condutividade_termica() -> CondutividadeTermica {
-        166
-    }
-}
+impl Gas for Carbono {}
+
+pub struct Vacuo;
+
+impl Gas for Vacuo {}
 
 
