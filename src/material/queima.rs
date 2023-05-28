@@ -2,7 +2,7 @@ use std::marker::PhantomData;
 
 pub struct Combustivel<Cm>
 where
-    Cm: Consumivel,
+    Cm: Material,
 {
     peso: Peso,
     phantom: PhantomData<Cm>,
@@ -10,7 +10,7 @@ where
 
 impl <Cm> Combustivel<Cm>
 where
-    Cm: Consumivel
+    Cm: Material,
 {
     pub fn gerar(peso: Peso) -> Self {
         Self {
@@ -20,6 +20,10 @@ where
     }
 }
 
-
+impl <Cm> Consumivel for Combustivel<Cm> {
+    fn consumir(self) -> (Calor, Gas) {
+        (Cm::ENERGIA * self.peso, Cm::GAS * self.peso)
+    }
+}
 
 
