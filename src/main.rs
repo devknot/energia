@@ -1,4 +1,37 @@
-//mod usina;
+mod estruturas;
+
+use estruturas::eletrica;
+
+trait A {}
+
+struct B;
+
+impl A for B {}
+
+trait Dig<As>
+where
+    As: A,
+{
+    fn p(&self, a: As);
+}
+
+struct Ficticio;
+
+impl <As: A> Dig<As> for Ficticio {
+    fn p(&self, _: As) {
+        println!("tudo certo.")
+    }
+}
+
+fn main() {
+    let fumaceiro = eletrica::Fumaceiro::gerar();
+
+    let f = Ficticio;
+    f.p(B);
+}
+
+
+/*
 mod utilidades;
 
 mod gases;
@@ -24,5 +57,5 @@ fn main() {
 
     println!("{}", forca);
 }
-
+*/
 
